@@ -5,6 +5,12 @@
  */
 package io.github.jkling2.workoutappswing;
 
+import java.awt.Color;
+import java.util.Locale;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
 /**
  *
  * @author jkling
@@ -15,6 +21,7 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
      * Creates new form WorkoutAppGUI
      */
     public WorkoutAppGUI() {
+        setLocale(Locale.ENGLISH);
         initComponents();
     }
 
@@ -27,8 +34,6 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollBar1 = new javax.swing.JScrollBar();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         configurationPanel = new javax.swing.JPanel();
         submitButton = new javax.swing.JButton();
         configureButton = new javax.swing.JButton();
@@ -54,8 +59,6 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         startButton = new javax.swing.JButton();
         timerHeader = new javax.swing.JLabel();
         remainingRoundsLabel = new javax.swing.JLabel();
-
-        jFormattedTextField1.setText("jFormattedTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Workout App");
@@ -107,14 +110,10 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         );
         intervalPanelLayout.setVerticalGroup(
             intervalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(intervalPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(intervalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(intervalTimeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(intervalUnitLabel)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, intervalPanelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(intervalTimeLabel))
+            .addGroup(intervalPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(intervalTimeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(intervalUnitLabel))
+            .addComponent(intervalTimeLabel, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         breakUnitLabel.setText("0 sec");
@@ -204,15 +203,13 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
                 .addGroup(configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(configurationHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(roundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(configurationPanelLayout.createSequentialGroup()
-                        .addGroup(configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(intervalPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(breakPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, configurationPanelLayout.createSequentialGroup()
-                                .addComponent(submitButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(configureButton)))
-                        .addGap(0, 0, 0)))
+                    .addGroup(configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(intervalPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(breakPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, configurationPanelLayout.createSequentialGroup()
+                            .addComponent(submitButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(configureButton))))
                 .addGap(13, 13, 13))
         );
         configurationPanelLayout.setVerticalGroup(
@@ -234,7 +231,7 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         );
 
         timerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        timerPanel.setPreferredSize(new java.awt.Dimension(315, 151));
+        timerPanel.setPreferredSize(new java.awt.Dimension(315, 165));
 
         breakButton.setText("Break");
         breakButton.setEnabled(false);
@@ -327,11 +324,11 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(timerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(configurationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +336,7 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(configurationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(timerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(timerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -361,7 +358,6 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         workoutStateLabel.setEnabled(!workoutStateLabel.isEnabled());
         remainingRoundsLabel.setEnabled(!remainingRoundsLabel.isEnabled());
         intervalProgressBar.setEnabled(!intervalProgressBar.isEnabled());
-        breakProgressBar.setEnabled(!breakProgressBar.isEnabled());
     }
     
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
@@ -372,22 +368,27 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
             breakButton.setEnabled(true);
             stopButton.setEnabled(true);
         }
-        //wTT.startCountdown(this.intervalProgressBar, this.breakProgressBar, this.startButton);
-        //wTT = new WorkoutTimerThread(this.intervalTimeSlider.getValue(), this.breakTimeSlider.getValue(), this.roundsSlider.getValue());
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void breakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breakButtonActionPerformed
         countDownManager.clear();
         startButton.setEnabled(true);
         breakButton.setEnabled(false);
-        stopButton.setEnabled(false);
+        stopButton.setEnabled(true);
     }//GEN-LAST:event_breakButtonActionPerformed
 
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
         countDownManager.clear();
-        startButton.setEnabled(true);
-        breakButton.setEnabled(false);
-        stopButton.setEnabled(false);
+        int res = JOptionPane.showConfirmDialog(intervalProgressBar, "Hit Okay if you want to reset the Workout.\nHit Cancel if you want to continue your Workout.", "Attention - Resetting Workout", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (res == 0) {
+            // reset workout
+            resetWorkoutGUI();
+            countDownTimer.resetWorkout();
+            counter.updateValues();
+        } else {
+            startButton.setEnabled(true);
+            breakButton.setEnabled(false);
+        }
     }//GEN-LAST:event_stopButtonActionPerformed
 
     private void roundsSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_roundsSliderStateChanged
@@ -407,25 +408,44 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         breakButton.setEnabled(false);
         stopButton.setEnabled(false);
         startButton.setEnabled(false);
+        breakProgressBar.setEnabled(false);
         countDownManager.clear();
     }//GEN-LAST:event_configureButtonActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        changeFocus();
-        startButton.setEnabled(true);
-        startButton.setText("Start");
-        breakButton.setEnabled(false);
-        stopButton.setEnabled(false);
-        workoutStateLabel.setText(intervalUnitLabel.getText() + " PUSH - " + breakUnitLabel.getText() + " REST - " + roundsUnitLabel.getText());
-        intervalProgressBar.setMaximum(intervalTimeSlider.getValue());
-        breakProgressBar.setMaximum(breakTimeSlider.getValue());
+        if (roundsSlider.getValue() <= 0 || intervalTimeSlider.getValue() <= 0) {
+            String warningString = "";
+            if (roundsSlider.getValue() <= 0 && intervalTimeSlider.getValue() <= 0) {
+                warningString = "Set an Interval Time that is greater than zero. \n AND \nSet the number of Rounds to a value that is greater than zero.";
+            } else if (roundsSlider.getValue() <= 0) {
+                warningString = "Set the number of Rounds to a value that is greater than zero.";
+            } else {
+                warningString = "Set an Interval Time that is greater than zero.";
+            }
+            JOptionPane.showConfirmDialog(submitButton, warningString, "Incorrect Configuration", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+        } else {
+            changeFocus();
+            startButton.setEnabled(true);
+            startButton.setText("Start");
+            breakButton.setEnabled(false);
+            stopButton.setEnabled(false);
+            workoutStateLabel.setText(intervalUnitLabel.getText() + " PUSH - " + breakUnitLabel.getText() + " REST - " + roundsUnitLabel.getText());
+            intervalProgressBar.setMaximum(intervalTimeSlider.getValue());
+            breakProgressBar.setMaximum(breakTimeSlider.getValue());
+            breakProgressBar.setEnabled(true);
 
-        countDownTimer = new CountDownTimer(intervalTimeSlider.getValue(), breakTimeSlider.getValue(), roundsSlider.getValue());
-        counter = new Counter(intervalProgressBar, breakProgressBar, remainingRoundsLabel, countDownTimer);
-
-        //wTT = new WorkoutTimerThread(this.intervalTimeSlider.getValue(), this.breakTimeSlider.getValue(), this.roundsSlider.getValue());
+            countDownTimer = new CountDownTimer(intervalTimeSlider.getValue(), breakTimeSlider.getValue(), roundsSlider.getValue());
+            counter = new Counter(intervalProgressBar, breakProgressBar, remainingRoundsLabel, startButton, breakButton, stopButton, countDownTimer);
+        }
     }//GEN-LAST:event_submitButtonActionPerformed
 
+    public void resetWorkoutGUI() {
+        startButton.setText("Start");
+        startButton.setEnabled(true);
+        breakButton.setEnabled(false);
+        stopButton.setEnabled(false);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -462,7 +482,7 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
     }
     
     //private WorkoutTimerThread wTT;
-    CountDownManager countDownManager = new CountDownManager();
+    private CountDownManager countDownManager = new CountDownManager();
     private CountDownTimer countDownTimer;
     private Counter counter;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -480,8 +500,6 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
     private javax.swing.JLabel intervalTimeLabel;
     private javax.swing.JSlider intervalTimeSlider;
     private javax.swing.JLabel intervalUnitLabel;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JLabel remainingRoundsLabel;
     private javax.swing.JPanel roundPanel;
     private javax.swing.JLabel roundsLabel;
