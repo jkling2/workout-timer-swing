@@ -5,11 +5,9 @@
  */
 package io.github.jkling2.workoutappswing;
 
-import java.awt.Color;
-import java.util.Locale;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 /**
  *
@@ -21,7 +19,13 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
      * Creates new form WorkoutAppGUI
      */
     public WorkoutAppGUI() {
-        setLocale(Locale.ENGLISH);
+        ImageIcon myAppImage = null;
+        URL imgURL = WorkoutAppGUI.class.getClassLoader().getResource("img/favicon.png");
+        if(imgURL != null) {
+            myAppImage = new ImageIcon(imgURL);
+        }
+        if(myAppImage != null)
+            setIconImage(myAppImage.getImage());
         initComponents();
     }
 
@@ -64,7 +68,7 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         setTitle("Workout App");
 
         configurationPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        configurationPanel.setPreferredSize(new java.awt.Dimension(315, 146));
+        configurationPanel.setPreferredSize(new java.awt.Dimension(315, 158));
 
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -171,12 +175,12 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         roundPanelLayout.setHorizontalGroup(
             roundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(roundPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(roundsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(roundsSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(roundsUnitLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))
+                .addComponent(roundsUnitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         roundPanelLayout.setVerticalGroup(
             roundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +193,8 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
                 .addGap(0, 0, 0))
         );
 
-        configurationHeader.setForeground(java.awt.SystemColor.textHighlight);
+        configurationHeader.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        configurationHeader.setForeground(new java.awt.Color(119, 178, 85));
         configurationHeader.setLabelFor(configurationHeader);
         configurationHeader.setText("Workout Configuration");
         configurationHeader.setPreferredSize(new java.awt.Dimension(102, 13));
@@ -200,23 +205,30 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
             configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(configurationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(configurationHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(roundPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(intervalPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(breakPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, configurationPanelLayout.createSequentialGroup()
-                            .addComponent(submitButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(configureButton))))
-                .addGap(13, 13, 13))
+                .addGroup(configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(configurationPanelLayout.createSequentialGroup()
+                        .addGroup(configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(configurationHeader, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, configurationPanelLayout.createSequentialGroup()
+                                .addGroup(configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(intervalPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(breakPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(roundPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(13, 13, 13))
+                    .addGroup(configurationPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(submitButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(configureButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         configurationPanelLayout.setVerticalGroup(
             configurationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(configurationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(configurationHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(configurationHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(intervalPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,7 +243,7 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         );
 
         timerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        timerPanel.setPreferredSize(new java.awt.Dimension(315, 165));
+        timerPanel.setPreferredSize(new java.awt.Dimension(315, 169));
 
         breakButton.setText("Break");
         breakButton.setEnabled(false);
@@ -268,7 +280,8 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
             }
         });
 
-        timerHeader.setForeground(java.awt.SystemColor.textHighlight);
+        timerHeader.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        timerHeader.setForeground(new java.awt.Color(119, 178, 85));
         timerHeader.setLabelFor(timerHeader);
         timerHeader.setText("Workout Timer");
 
@@ -282,27 +295,29 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
             .addGroup(timerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(timerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(breakProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(timerHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(timerPanelLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addGroup(timerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(timerPanelLayout.createSequentialGroup()
-                                .addComponent(startButton)
-                                .addGap(28, 28, 28)
-                                .addComponent(breakButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(stopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(workoutStateLabel)
-                            .addComponent(remainingRoundsLabel))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(intervalProgressBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(remainingRoundsLabel)
+                            .addGroup(timerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(breakProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                                .addComponent(workoutStateLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, timerPanelLayout.createSequentialGroup()
+                                    .addComponent(startButton)
+                                    .addGap(35, 35, 35)
+                                    .addComponent(breakButton)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(stopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(intervalProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 8, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         timerPanelLayout.setVerticalGroup(
             timerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(timerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(timerHeader)
+                .addComponent(timerHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(workoutStateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -311,12 +326,12 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
                 .addComponent(intervalProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(breakProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(timerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(startButton)
                     .addComponent(breakButton)
                     .addComponent(stopButton))
-                .addGap(19, 19, 19))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -327,17 +342,17 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(timerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(configurationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(configurationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(configurationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(timerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -379,7 +394,8 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
 
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
         countDownManager.clear();
-        int res = JOptionPane.showConfirmDialog(intervalProgressBar, "Hit Okay if you want to reset the Workout.\nHit Cancel if you want to continue your Workout.", "Attention - Resetting Workout", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        Object[] options = {"OK", "Cancel"};
+        int res = JOptionPane.showOptionDialog(intervalProgressBar, "Hit OK if you want to reset the Workout.\nHit Cancel if you want to continue your Workout.", "Attention - Resetting Workout", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (res == 0) {
             // reset workout
             resetWorkoutGUI();
@@ -472,7 +488,7 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(WorkoutAppGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

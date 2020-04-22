@@ -5,10 +5,8 @@
  */
 package io.github.jkling2.workoutappswing;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.AudioInputStream;
@@ -23,8 +21,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class CountDownTimer {
 
-    private static final File soundBeforeInterval= new File(".\\src\\main\\resources\\sounds\\beforeInterval.wav");
-    private static final File soundBeforeBreak= new File(".\\src\\main\\resources\\sounds\\beforeBreak.wav");
+    private static final URL soundBeforeInterval= CountDownTimer.class.getClassLoader().getResource("sounds/beforeInterval.wav");
+    private static final URL soundBeforeBreak= CountDownTimer.class.getClassLoader().getResource("sounds/beforeBreak.wav");
     private final int initialIntervalTime;
     private final int initialBreakTime;
     private final int initialRounds;
@@ -86,14 +84,10 @@ public class CountDownTimer {
         return this.currentRound;
     }
     
-    private void playSound(File file) {
+    private void playSound(URL soundURL) {
         try {
             // Open an audio input stream.
-            URL url = null;
-            if (file.canRead()) {
-                url = file.toURI().toURL();
-            }
-            AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundURL);
             // Get a sound clip resource.
             Clip clip = AudioSystem.getClip();
             // Open audio clip and load samples from the audio input stream.
