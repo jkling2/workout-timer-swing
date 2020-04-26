@@ -2,7 +2,9 @@
 
 This Swing-based Workout Timer lets you set the Interval Time, Break Time and Rounds for your individual Workout. 
 
-![Demo](/WorkoutTimerSwing_demo.PNG)
+<p align="center">
+  <img src="WorkoutTimerSwing_demo.PNG" alt="Screencast"/>
+</p>
 
 A newer application (build with React) that works the same way can be found here: [React Workout Timer](https://jkling2.github.io/workout-timer/ "React Workout Timer").
 
