@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
+ * Main class of this Workout Application.
  *
  * @author jkling
  */
@@ -21,11 +22,12 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
     public WorkoutAppGUI() {
         ImageIcon myAppImage = null;
         URL imgURL = WorkoutAppGUI.class.getClassLoader().getResource("img/favicon.png");
-        if(imgURL != null) {
+        if (imgURL != null) {
             myAppImage = new ImageIcon(imgURL);
         }
-        if(myAppImage != null)
+        if (myAppImage != null) {
             setIconImage(myAppImage.getImage());
+        }
         initComponents();
     }
 
@@ -358,6 +360,10 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * changes the focus of those elements that are enabled/disbled depending
+     * only on the current Panel (configuration or timer)
+     */
     private void changeFocus() {
         submitButton.setEnabled(!submitButton.isEnabled());
         configureButton.setEnabled(!configureButton.isEnabled());
@@ -374,7 +380,12 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         remainingRoundsLabel.setEnabled(!remainingRoundsLabel.isEnabled());
         intervalProgressBar.setEnabled(!intervalProgressBar.isEnabled());
     }
-    
+
+    /**
+     * performs the actions to start the actual countdown action
+     *
+     * @param evt the click event performed
+     */
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         if (counter != null) {
             countDownManager.set(counter);
@@ -385,6 +396,11 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_startButtonActionPerformed
 
+    /**
+     * performs the actions to break the workout
+     *
+     * @param evt the click event performed
+     */
     private void breakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breakButtonActionPerformed
         countDownManager.clear();
         startButton.setEnabled(true);
@@ -392,33 +408,62 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         stopButton.setEnabled(true);
     }//GEN-LAST:event_breakButtonActionPerformed
 
+    /**
+     * performs the action to stop the workout
+     *
+     * @param evt the click event performed
+     */
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
         countDownManager.clear();
         Object[] options = {"OK", "Cancel"};
         int res = JOptionPane.showOptionDialog(intervalProgressBar, "Hit OK if you want to reset the Workout.\nHit Cancel if you want to continue your Workout.", "Attention - Resetting Workout", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         if (res == 0) {
             // reset workout
-            resetWorkoutGUI();
+            startButton.setText("Start");
+            startButton.setEnabled(true);
+            breakButton.setEnabled(false);
+            stopButton.setEnabled(false);
             countDownTimer.resetWorkout();
             counter.updateValues();
         } else {
+            // workout was only paused - enable continuing it
             startButton.setEnabled(true);
             breakButton.setEnabled(false);
         }
     }//GEN-LAST:event_stopButtonActionPerformed
 
+    /**
+     * update the text of the slider when changed
+     * 
+     * @param evt the event causing the action
+     */
     private void roundsSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_roundsSliderStateChanged
         roundsUnitLabel.setText(roundsSlider.getValue() + " Rounds");
     }//GEN-LAST:event_roundsSliderStateChanged
 
+    /**
+     * update the text of the slider when changed
+     * 
+     * @param evt the event causing the action
+     */
     private void breakTimeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_breakTimeSliderStateChanged
         breakUnitLabel.setText(breakTimeSlider.getValue() + " sec");
     }//GEN-LAST:event_breakTimeSliderStateChanged
 
+    /**
+     * update the text of the slider when changed
+     * 
+     * @param evt the event causing the action
+     */
     private void intervalTimeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_intervalTimeSliderStateChanged
         intervalUnitLabel.setText(intervalTimeSlider.getValue() + " sec");
     }//GEN-LAST:event_intervalTimeSliderStateChanged
 
+    /**
+     * enable changing the workout meta data
+     * 
+     * @param evt the click event performed
+     */
     private void configureButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configureButtonActionPerformed
         changeFocus();
         breakButton.setEnabled(false);
@@ -428,6 +473,11 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
         countDownManager.clear();
     }//GEN-LAST:event_configureButtonActionPerformed
 
+    /**
+     * enable the timer if a valid interval time and a valid number of rounds was provided
+     * 
+     * @param evt the click event performed
+     */
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         if (roundsSlider.getValue() <= 0 || intervalTimeSlider.getValue() <= 0) {
             String warningString = "";
@@ -449,19 +499,11 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
             intervalProgressBar.setMaximum(intervalTimeSlider.getValue());
             breakProgressBar.setMaximum(breakTimeSlider.getValue());
             breakProgressBar.setEnabled(true);
-
             countDownTimer = new CountDownTimer(intervalTimeSlider.getValue(), breakTimeSlider.getValue(), roundsSlider.getValue());
             counter = new Counter(intervalProgressBar, breakProgressBar, remainingRoundsLabel, startButton, breakButton, stopButton, countDownTimer);
         }
     }//GEN-LAST:event_submitButtonActionPerformed
 
-    public void resetWorkoutGUI() {
-        startButton.setText("Start");
-        startButton.setEnabled(true);
-        breakButton.setEnabled(false);
-        stopButton.setEnabled(false);
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -488,7 +530,7 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(WorkoutAppGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -496,7 +538,7 @@ public class WorkoutAppGUI extends javax.swing.JFrame {
             }
         });
     }
-    
+
     //private WorkoutTimerThread wTT;
     private CountDownManager countDownManager = new CountDownManager();
     private CountDownTimer countDownTimer;

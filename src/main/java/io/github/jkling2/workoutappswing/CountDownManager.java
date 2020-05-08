@@ -9,29 +9,45 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-    public class CountDownManager {
+/**
+ * Class that manages the Counter and the Timer.
+ * 
+ * @author jkling
+ */
+public class CountDownManager {
 
-        private Counter timer;
+    private Counter timer;
 
-        public CountDownManager() {
+    /**
+     * Constructor initializing and starting a 1 sec timer
+     */
+    public CountDownManager() {
 
-            Timer countdownTimer = new Timer(1000, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (timer != null) {
-                        timer.tick(CountDownManager.this);
-                    }
+        Timer countdownTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (timer != null) {
+                    timer.tick(CountDownManager.this);
                 }
-            });
-            countdownTimer.start();
-        }
-
-        public void set(Counter timer) {
-            this.timer = timer;
-        }
-
-        public void clear() {
-            this.timer = null;
-        }
-
+            }
+        });
+        countdownTimer.start();
     }
+
+    /**
+     * set the given Counter
+     * 
+     * @param timer the Counter to set
+     */
+    public void set(Counter timer) {
+        this.timer = timer;
+    }
+
+    /**
+     * remove the current Counter
+     */
+    public void clear() {
+        this.timer = null;
+    }
+
+}

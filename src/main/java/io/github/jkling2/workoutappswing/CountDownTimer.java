@@ -16,13 +16,15 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- *
+ * Class that manages the initial and current workout time.
+ * 
  * @author jkling
  */
 public class CountDownTimer {
 
-    private static final URL soundBeforeInterval= CountDownTimer.class.getClassLoader().getResource("sounds/beforeInterval.wav");
-    private static final URL soundBeforeBreak= CountDownTimer.class.getClassLoader().getResource("sounds/beforeBreak.wav");
+    private static final URL SOUND_BEFORE_INTERVAL = CountDownTimer.class.getClassLoader().getResource("sounds/beforeInterval.wav");
+    private static final URL SOUND_BEFORE_BREAK = CountDownTimer.class.getClassLoader().getResource("sounds/beforeBreak.wav");
+    
     private final int initialIntervalTime;
     private final int initialBreakTime;
     private final int initialRounds;
@@ -30,6 +32,12 @@ public class CountDownTimer {
     private int currentBreakTime;
     private int currentRound;
     
+    /**
+     * Constructor.
+     * @param intervalTime the interval time of the workout
+     * @param breakTime the break time of the workout
+     * @param rounds the number of rounds to perform the workout
+     */
     public CountDownTimer(int intervalTime, int breakTime, int rounds) {
         this.initialIntervalTime = intervalTime;
         this.currentIntervalTime = intervalTime;
@@ -39,51 +47,70 @@ public class CountDownTimer {
         this.currentRound = 0;
     }
 
+    /**
+     * @return the initial interval time
+     */
     public int getInitialIntervalTime() {
         return initialIntervalTime;
     }
 
+    /**
+     * @return the initial break time
+     */
     public int getInitialBreakTime() {
         return initialBreakTime;
     }
 
+    /**
+     * @return the initial number of rounds
+     */
     public int getInitialRounds() {
         return initialRounds;
     }
 
+    /**
+     * @return the current interval time
+     */
     public int getCurrentIntervalTime() {
         return currentIntervalTime;
     }
 
-    public void setCurrentIntervalTime(int currentIntervalTime) {
-        this.currentIntervalTime = currentIntervalTime;
-    }
-
+    /**
+     * @return the current break time
+     */
     public int getCurrentBreakTime() {
         return currentBreakTime;
     }
-
-    public void setCurrentBreakTime(int currentBreakTime) {
-        this.currentBreakTime = currentBreakTime;
-    }
     
+    /**
+     * @return the current round
+     */
     public int getCurrentRound() {
         return currentRound;
     }
     
+    /**
+     * @return the number of rounds that are left
+     */
     public int getRoundsToGo() {
         return this.initialRounds - this.currentRound;
     }
-
-    public void setCurrentRound(int currentRound) {
-        this.currentRound = currentRound;
-    }
     
+    /**
+     * increments the current round number by one 
+     * 
+     * @return the new round
+     */
     public int setNextRound() {
         this.currentRound++;
         return this.currentRound;
     }
     
+    /**
+     * plays the sound from the given URL
+     * 
+     * @param soundURL the URL of the sound to play
+     */
     private void playSound(URL soundURL) {
         try {
             // Open an audio input stream.
@@ -102,15 +129,13 @@ public class CountDownTimer {
         }
     }
 
-   /**
-     * *****************************************
+    /**
      * Decreases the CountDownTimer by 1 second
-     * *****************************************
      */
     public void dec() {
         if (this.currentRound == 0) {
             this.currentRound++;
-            playSound(CountDownTimer.soundBeforeInterval);
+            playSound(CountDownTimer.SOUND_BEFORE_INTERVAL);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
@@ -120,12 +145,12 @@ public class CountDownTimer {
             if (currentIntervalTime > 0) {
                 this.currentIntervalTime--;
                 if (this.currentIntervalTime == 0) {
-                    playSound(CountDownTimer.soundBeforeBreak);
+                    playSound(SOUND_BEFORE_BREAK);
                 }
             } else if (currentBreakTime > 0) {
                 this.currentBreakTime--;
                 if (this.currentBreakTime == 0) {
-                    playSound(CountDownTimer.soundBeforeInterval);
+                    playSound(SOUND_BEFORE_INTERVAL);
                 }
             } else if (getRoundsToGo() > 0) {
                 this.currentRound++;
@@ -137,17 +162,22 @@ public class CountDownTimer {
         } 
     }
     
+    /**
+     * Resets the workout by setting the current times/rounds to their initial value
+     */
     public void resetWorkout() {
-        setCurrentIntervalTime(this.initialIntervalTime);
-        setCurrentBreakTime(this.initialBreakTime);
-        setCurrentRound(0);
+        this.currentIntervalTime = this.initialIntervalTime;
+        this.currentBreakTime = this.initialBreakTime;
+        this.currentRound = 0;
     }
     
-       /**
-         * Returns the object as a string in the format of "00:00:00"
-         */
-        public String toString() {
-            return "countdown from: " + this.initialIntervalTime + "-" + this.initialBreakTime + "_" + this.initialRounds + 
-                    "; countdown actual: " + this.currentIntervalTime + "-" + this.currentBreakTime + "-" + this.currentRound ;
-        }
+    /**
+     * Returns the object as a string
+     * 
+     * @return the formatted string 
+     */
+    public String toString() {
+        return "countdown from: " + this.initialIntervalTime + "-" + this.initialBreakTime + "_" + this.initialRounds
+                + "; countdown actual: " + this.currentIntervalTime + "-" + this.currentBreakTime + "-" + this.currentRound;
+    }
 }
